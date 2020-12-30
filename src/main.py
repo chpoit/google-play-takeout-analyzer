@@ -1,9 +1,13 @@
 from loader.config_loader import load_config 
-from loader.takeout_loader import load_takeout 
+from factory.takeout_factory import TakeoutFactory 
+from writer.playlist_writer import PlaylistWriter
 
 
 if __name__ == "__main__":
     config = load_config()
-    takeout = load_takeout(config["takeout-path"])
+    takeout = TakeoutFactory().create_takeout(config)
 
     takeout.print()
+    playlists = takeout.compress_playlists()
+
+    PlaylistWriter(config).write_playlists(playlists)

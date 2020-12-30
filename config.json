@@ -1,3 +1,4 @@
 {
-    "takeout-path":"~/Documents/takeout-20201209T004710Z-001"
+    "takeout-path":"~/Documents/takeout-20201209T004710Z-001",
+    "csv-headers":["Title", "Album", "Artist", "Duration (ms)", "Rating", "Play Count", "Removed", "Playlist Index"]
 }
