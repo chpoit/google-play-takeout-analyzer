@@ -1,11 +1,19 @@
 import os
 import csv
+from pathlib import Path
 
-from loader.playlist_loader import PlaylistLoader
+from loader.PlaylistLoader import PlaylistLoader
 
 
 class Takeout:
-    def __init__(self, playlist_loader: PlaylistLoader, csv_headers, tracks_locations, playlists_locations, radio_stations_locations):
+    def __init__(
+        self,
+        playlist_loader: PlaylistLoader,
+        csv_headers,
+        tracks_locations,
+        playlists_locations,
+        radio_stations_locations,
+    ):
         self.playlist_loader = playlist_loader
         self.csv_headers = csv_headers
         self.tracks_locations = tracks_locations
@@ -28,9 +36,10 @@ class Takeout:
         track_list = {}
         for name in os.scandir(self.playlists_locations):
             if playlists is None or name in playlists:
-                playlist_path = os.path.join(self.playlists_locations, name)
+                playlist_path = Path(self.playlists_locations, name)
                 track_list[name.name] = self.playlist_loader.load_playlist_tracks(
-                    playlist_path)
+                    playlist_path
+                )
 
         # print(track_list)
         return track_list
