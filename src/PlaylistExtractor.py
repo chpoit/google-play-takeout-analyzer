@@ -8,9 +8,13 @@ class PlaylistExtractor:
         self.headers = headers
         self.playlist = playlist
         self.encoding = encoding
-        play_path = Path("out", playlist + ".csv")
-        tracks = []
-        with open(play_path, encoding=encoding) as csv_file:
+
+        self._read_playlist_data()
+
+    def _read_playlist_data(self):
+        play_path = Path("out", self.playlist + ".csv")
+        self.tracks = []
+        with open(play_path, encoding=self.encoding) as csv_file:
             csv_reader = csv.reader(csv_file)
             line_count = 0
             for row in csv_reader:
@@ -18,12 +22,13 @@ class PlaylistExtractor:
                     break
                 if line_count == 0:
                     line_count += 1
+                    continue
                 else:
                     track_info = {}
                     for i in range(len(row)):
-                        track_info[headers[i]] = row[i]
+                        track_info[self.headers[i]] = row[i]
 
-                    tracks.append(track_info)
+                    self.tracks.append(track_info)
 
     def move_playlist_data(self):
         pass

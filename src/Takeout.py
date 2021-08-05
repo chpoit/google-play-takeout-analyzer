@@ -10,20 +10,20 @@ class Takeout:
         self,
         playlist_loader: PlaylistLoader,
         csv_headers,
-        tracks_locations,
-        playlists_locations,
-        radio_stations_locations,
+        tracks_location,
+        playlists_location,
+        radio_stations_location,
     ):
         self.playlist_loader = playlist_loader
         self.csv_headers = csv_headers
-        self.tracks_locations = tracks_locations
-        self.playlists_locations = playlists_locations
-        self.radio_stations_locations = radio_stations_locations
+        self.tracks_location = tracks_location
+        self.playlists_location = playlists_location
+        self.radio_stations_location = radio_stations_location
 
     def print(self):
-        print(f"Tracks: {self.tracks_locations}")
-        print(f"Playlists: {self.playlists_locations}")
-        print(f"Radio Stations: {self.radio_stations_locations}")
+        print(f"Tracks: {self.tracks_location}")
+        print(f"Playlists: {self.playlists_location}")
+        print(f"Radio Stations: {self.radio_stations_location}")
 
     def compress_playlists(self, playlists=None):
         if playlists is None:
@@ -34,12 +34,11 @@ class Takeout:
             playlists = None
 
         track_list = {}
-        for name in os.scandir(self.playlists_locations):
+        for name in os.scandir(self.playlists_location):
             if playlists is None or name in playlists:
-                playlist_path = Path(self.playlists_locations, name)
+                playlist_path = Path(self.playlists_location, name)
                 track_list[name.name] = self.playlist_loader.load_playlist_tracks(
                     playlist_path
                 )
 
-        # print(track_list)
         return track_list
