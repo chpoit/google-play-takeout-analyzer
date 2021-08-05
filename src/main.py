@@ -10,14 +10,16 @@ if __name__ == "__main__":
     playlists_to_extract = ["Thumbs up"]
     config = load_config()
 
-    if not Path("out").exists() or True:
+    pw = PlaylistWriter(config)
+
+    if not Path("out").exists():
         takeout = TakeoutFactory().create_takeout(config)
 
         takeout.print()
-        playlists = takeout.compress_playlists()
+        playlists = takeout.compress_playlists(playlists_to_extract)
 
-        PlaylistWriter(config).write_playlists(playlists)
+        pw.write_playlists(playlists)
 
     for playlist in playlists_to_extract:
         pe = PlaylistExtractorFactory().create_extractor(config, playlist)
-        pe.move_playlist_data()
+        pw.write_missing_existing(pe)

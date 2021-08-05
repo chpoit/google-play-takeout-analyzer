@@ -33,11 +33,12 @@ class Takeout:
         elif len(playlists) == 0:
             playlists = None
 
+
         track_list = {}
-        for name in os.scandir(self.playlists_location):
-            if playlists is None or name in playlists:
-                playlist_path = Path(self.playlists_location, name)
-                track_list[name.name] = self.playlist_loader.load_playlist_tracks(
+        for file_name in os.scandir(self.playlists_location):
+            if playlists is None or file_name.name in playlists:
+                playlist_path = Path(self.playlists_location, file_name)
+                track_list[file_name.name] = self.playlist_loader.load_playlist_tracks(
                     playlist_path
                 )
 
