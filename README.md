@@ -5,3 +5,8 @@ Simple scripts that read the data from playlits taken from a Google Play Music d
 Run the `src/main.py` file to create your lists.
 
 Set the path to your takeout in the `config.json` file.
+
+Three files per playlist are created:
+- `out/<PLAYLIST>/missing.csv`: No file was found for the tracks in this file.
+- `out/<PLAYLIST>/existing.csv`: A csv file with data was found for the tracks in this file.
+- `out/<PLAYLIST>/mp3.csv`: A mp3 file was found for the tracks in this file.
