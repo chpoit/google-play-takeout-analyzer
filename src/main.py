@@ -7,7 +7,9 @@ from writer.PlaylistWriter import PlaylistWriter
 from PlaylistExtractor import PlaylistExtractor
 
 if __name__ == "__main__":
-    playlists_to_extract = ["Thumbs up"]
+    playlists_to_extract = []
+    # playlists_to_extract = ["Thumbs up"]
+
     config = load_config()
 
     pw = PlaylistWriter(config)
